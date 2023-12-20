@@ -1,30 +1,36 @@
-import React, {useState} from "react";
+import React from "react";
 
-export default function About() {
+export default function About(props) {
     
-    const [myStyle, setMyStyle] = useState({
-        color: 'white',
-        backgroundColor: '#21201d'
-    })
+    // const [myStyle, setMyStyle] = useState({
+    //     color: 'white',
+    //     backgroundColor: '#21201d'
+    // })
     
-    const [btnText, setBtnText] = useState("Enable Dark Mode")
+    // const [btnText, setBtnText] = useState("Enable Dark Mode")
 
-    const toggleStyle = ()=> {
-        if(myStyle.color === 'white') {
-            setMyStyle(
-                {
-                    color: '#21201d',
-                    backgroundColor: 'white'
-                },
-                setBtnText("Enable Dark Mode"))
-            } else {
-                setMyStyle({
-                    color: 'white',
-                    backgroundColor: '#21201d'
-                },
-                setBtnText("Disable Dark Mode"))
-        }
+    // const toggleStyle = ()=> {
+    //     if(myStyle.color === 'white') {
+    //         setMyStyle(
+    //             {
+    //                 color: '#21201d',
+    //                 backgroundColor: 'white'
+    //             },
+    //             setBtnText("Enable Dark Mode"))
+    //         } else {
+    //             setMyStyle({
+    //                 color: 'white',
+    //                 backgroundColor: '#21201d'
+    //             },
+    //             setBtnText("Disable Dark Mode"))
+    //     }
+    // }
+
+    let myStyle = {
+        backgroundColor: props.mode==='dark'?'#3b3a37':'white',
+        color: props.mode==='dark'?'white':'black'
     }
+    
 
   return (
     <div className="container" style={myStyle}>
@@ -125,9 +131,9 @@ export default function About() {
         </div>
       </div>
       
-      <div className="container">
+      {/* <div className="container">
         <button onClick={toggleStyle} className="btn btn-primary my-3">{btnText}</button>
-      </div>
+      </div> */}
     </div>
   );
 }

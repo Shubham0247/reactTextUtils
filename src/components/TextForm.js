@@ -11,14 +11,24 @@ export default function TextForm(props) {
         // console.log("Uppercase was clicked");
         let newText = text.toUpperCase();
         setText(newText)
-        props.showAlert("text converted to uppercase successfully","success");
+        if(newText===""){
+            props.showAlert("Please enter some text to convert it to Uppercase","info");
+        } else {
+            props.showAlert("text converted to uppercase successfully","success");
+        }
     }
     
     const handleLowClick = () =>{
         // console.log("Uppercase was clicked");
         let newText = text.toLowerCase();
         setText(newText)
-        props.showAlert("text converted to lowercase successfully","success");
+        
+        if(newText===""){
+            props.showAlert("Please enter some text to convert it to Lowercase","info");
+        } else {
+            props.showAlert("text converted to lowercase successfully","success");
+        }
+        
     }
     
     const handleOnChange = (event) =>{
@@ -34,18 +44,32 @@ export default function TextForm(props) {
     }
     
     const handleCopyClick = () =>{
-
+        
         // var text = document.getElementById('myBox');
         // text.select();
         // text.setSelectionRange(0,9999);
         // navigator.clipboard.writeText(text.value);
         copy(text)
         document.getElementById('copyBtn').innerText = "Copied";
-        props.showAlert("text copied successfully","success");
+        if(text===""){
+            props.showAlert("Please enter some text to copy","info");
+        } else {
+            props.showAlert("text copied successfully","success");
+        }
+    }
+    
+    const handleExtraSpaces = () => {
+        let newText = text.split(/[ ]+/);
+        setText(newText.join(" "));
+        if(text===""){
+            props.showAlert("Please enter some text","info");
+        } else {
+            props.showAlert("Extra spaces removed!", "success");
+        }
     }
 
     let finalWordCount = text.split(" ").length;
-
+    
     if(text === '' || text[text.length - 1] === ' ')
         finalWordCount--;
 
@@ -82,6 +106,9 @@ export default function TextForm(props) {
         
         {/* Copy to Clipboard  */}
         <button className="btn btn-primary mx-1" id="copyBtn" onClick={handleCopyClick}>Copy to clipboard</button>
+        
+        {/* Remove extra spaces */}
+        <button className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
 
     </div>
         
@@ -93,7 +120,7 @@ export default function TextForm(props) {
         
         <p>{finalWordCount} words and {text.length} characters</p>
 
-        <p>{0.008 * finalWordCount}Minutes are required to read the above text</p>
+        <p>{0.008 * finalWordCount} Minutes are required to read the above text</p>
         <h2>Preview</h2>
         <p>{text}</p>
     </div>
